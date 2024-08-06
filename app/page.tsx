@@ -1,18 +1,23 @@
 import { SearchIcon } from "lucide-react"
-import Header from "./_components/header"
-import { Button } from "./_components/ui/button"
-import { Input } from "./_components/ui/input"
 import Image from "next/image"
+import Header from "./_components/header"
+import { Badge } from "./_components/ui/badge"
+import { Button } from "./_components/ui/button"
+import { Card, CardContent } from "./_components/ui/card"
+import { Input } from "./_components/ui/input"
+import { Avatar, AvatarImage } from "./_components/ui/avatar"
 
 export default function Home() {
   return (
     <div>
       <Header />
 
+      {/* TEXTO*/}
       <div className="p-5">
         <h2 className="text xl font-bold">Olá, Marcos!</h2>
         <p>Terça-feira, 06 de Agosto</p>
 
+        {/* BUSCA*/}
         <div className="mt-6 flex items-center gap-2">
           <Input placeholder="Digite sua busca..." />
           <Button>
@@ -20,7 +25,8 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="h-[150px] relative mt-6 w-full">
+        {/* BANNER*/}
+        <div className="relative mt-6 h-[150px] w-full">
           <Image
             src="/banner-01.png"
             alt="Agende nas melhores barbearias"
@@ -28,6 +34,30 @@ export default function Home() {
             className="rounded-xl object-cover"
           />
         </div>
+
+        {/* AGENDAMENTO*/}
+        <Card className="mt-6">
+          <CardContent className="flex justify-between p-0">
+            {/*   ESQUERDA*/}
+            <div className="flex flex-col gap-2 py-5 pl-5">
+              <Badge className="w-fit">Confirmado</Badge>
+              <h3 className="font-semibold">Corte de cabelo</h3>
+              <div className="itens-center flex gap-2">
+                <Avatar className="h-6 w-6">
+                  <AvatarImage src="https://utfs.io/f/5832df58-cfd7-4b3f-b102-42b7e150ced2-16r.png" />
+                  <p>Barbearia FSW</p>
+                </Avatar>
+              </div>
+            </div>
+
+            {/* DIREITA*/}
+            <div className="itens-center flex flex-col justify-center  border-l-2 border-solid px-5">
+              <p className="text-sm">Agosto</p>
+              <p className="text-2xl">06</p>
+              <p className="text-sm">20:00</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
