@@ -6,8 +6,11 @@ import { Button } from "./_components/ui/button"
 import { Card, CardContent } from "./_components/ui/card"
 import { Input } from "./_components/ui/input"
 import { Avatar, AvatarImage } from "./_components/ui/avatar"
+import { db } from "./_lib/prisma"
+import BarbershopItem from "./_components/barbershop-item"
 
-export default function Home() {
+export default async function Home() {
+  const barbershop = await db.barberShop.findMany()
   return (
     <div>
       <Header />
@@ -36,7 +39,10 @@ export default function Home() {
         </div>
 
         {/* AGENDAMENTO*/}
-        <Card className="mt-6">
+        <h2 className="mb-6 mt-6 text-lg font-bold uppercase text-gray-400">
+          Agendamentos
+        </h2>
+        <Card>
           <CardContent className="flex justify-between p-0">
             {/*   ESQUERDA*/}
             <div className="flex flex-col gap-2 py-5 pl-5">
@@ -45,13 +51,13 @@ export default function Home() {
               <div className="itens-center flex gap-2">
                 <Avatar className="h-6 w-6">
                   <AvatarImage src="https://utfs.io/f/5832df58-cfd7-4b3f-b102-42b7e150ced2-16r.png" />
-                  <p>Barbearia FSW</p>
                 </Avatar>
+                <p className="text-sm">Barbearia FSW</p>
               </div>
             </div>
 
             {/* DIREITA*/}
-            <div className="itens-center flex flex-col justify-center  border-l-2 border-solid px-5">
+            <div className="itens-center flex flex-col justify-center border-l-2 border-solid px-5">
               <p className="text-sm">Agosto</p>
               <p className="text-2xl">06</p>
               <p className="text-sm">20:00</p>
@@ -59,6 +65,14 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
+      <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Recomendados
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershop.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
     </div>
   )
 }
