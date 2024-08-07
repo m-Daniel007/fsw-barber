@@ -1,11 +1,9 @@
 import { SearchIcon } from "lucide-react"
 import Image from "next/image"
 import BarbershopItem from "./_components/barbershop-item"
+import BookingItem from "./_components/booking-item"
 import Header from "./_components/header"
-import { Avatar, AvatarImage } from "./_components/ui/avatar"
-import { Badge } from "./_components/ui/badge"
 import { Button } from "./_components/ui/button"
-import { Card, CardContent } from "./_components/ui/card"
 import { Input } from "./_components/ui/input"
 import { quickSearchOptions } from "./_constants/search"
 import { db } from "./_lib/prisma"
@@ -35,8 +33,8 @@ export default async function Home() {
           </Button>
         </div>
 
-         {/* BUSCA RÁPIDA */}
-         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+        {/* BUSCA RÁPIDA */}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
             <Button className="gap-2" variant="secondary" key={option.title}>
               <Image
@@ -61,49 +59,25 @@ export default async function Home() {
         </div>
 
         {/* AGENDAMENTO*/}
-        <h2 className="mb-6 mt-6 text-lg font-bold uppercase text-gray-400">
-          Agendamentos
-        </h2>
-        <Card>
-          <CardContent className="flex justify-between p-0">
-            {/*   ESQUERDA*/}
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <Badge className="w-fit">Confirmado</Badge>
-              <h3 className="font-semibold">Corte de cabelo</h3>
-              <div className="itens-center flex gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="https://utfs.io/f/5832df58-cfd7-4b3f-b102-42b7e150ced2-16r.png" />
-                </Avatar>
-                <p className="text-sm">Barbearia FSW</p>
-              </div>
-            </div>
-
-            {/* DIREITA*/}
-            <div className="itens-center flex flex-col justify-center border-l-2 border-solid px-5">
-              <p className="text-sm">Agosto</p>
-              <p className="text-2xl">06</p>
-              <p className="text-sm">20:00</p>
-            </div>
-          </CardContent>
-        </Card>
+        <BookingItem />
       </div>
       <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-          Recomendados
-        </h2>
-        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-          {barbershop.map((barbershop) => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-          ))}
-        </div>
+        Recomendados
+      </h2>
+      <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+        {barbershop.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+        ))}
+      </div>
 
-        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-          Populares
-        </h2>
-        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-          {popularBarbershop.map((barbershop) => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-          ))}
-        </div>
+      <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+        Populares
+      </h2>
+      <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+        {popularBarbershop.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+        ))}
+      </div>
     </div>
   )
 }
