@@ -1,16 +1,23 @@
 import { SearchIcon } from "lucide-react"
 import Image from "next/image"
+import BarbershopItem from "./_components/barbershop-item"
 import Header from "./_components/header"
+import { Avatar, AvatarImage } from "./_components/ui/avatar"
 import { Badge } from "./_components/ui/badge"
 import { Button } from "./_components/ui/button"
 import { Card, CardContent } from "./_components/ui/card"
 import { Input } from "./_components/ui/input"
-import { Avatar, AvatarImage } from "./_components/ui/avatar"
+import { quickSearchOptions } from "./_constants/search"
 import { db } from "./_lib/prisma"
-import BarbershopItem from "./_components/barbershop-item"
 
 export default async function Home() {
   const barbershop = await db.barberShop.findMany()
+  const popularBarbershop = await db.barberShop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  })
+
   return (
     <div>
       <Header />
@@ -26,6 +33,21 @@ export default async function Home() {
           <Button>
             <SearchIcon />
           </Button>
+        </div>
+
+         {/* BUSCA RÁPIDA */}
+         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          {quickSearchOptions.map((option) => (
+            <Button className="gap-2" variant="secondary" key={option.title}>
+              <Image
+                src={option.imageUrl}
+                width={16}
+                height={16}
+                alt={option.title}
+              />
+              {option.title}
+            </Button>
+          ))}
         </div>
 
         {/* BANNER*/}
@@ -70,6 +92,15 @@ export default async function Home() {
         </h2>
         <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
           {barbershop.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
+
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarbershop.map((barbershop) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
