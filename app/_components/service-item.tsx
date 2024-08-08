@@ -1,4 +1,3 @@
-
 import { BarberShopService } from "@prisma/client"
 import Image from "next/image"
 import { Button } from "./ui/button"

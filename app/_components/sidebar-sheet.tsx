@@ -19,8 +19,8 @@ const SidebarSheet = () => {
         </Avatar>
 
         <div>
-          <p className="font-bold">Felipe Rocha</p>
-          <p className="text-xs">felipe@fullstackclub.io</p>
+          <p className="font-bold">Marcos Santos</p>
+          <p className="text-xs">marcos@fullstackclub.io</p>
         </div>
       </div>
 

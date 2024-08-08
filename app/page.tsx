@@ -23,7 +23,7 @@ export default async function Home() {
       {/* TEXTO*/}
       <div className="p-5">
         <h2 className="text xl font-bold">Olá, Marcos!</h2>
-        <p>Terça-feira, 06 de Agosto</p>
+        <p>Quarta-feira, 07 de Agosto</p>
 
         {/* BUSCA*/}
         <div className="mt-6 flex items-center gap-2">
